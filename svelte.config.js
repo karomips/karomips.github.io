@@ -1,12 +1,15 @@
 import adapter from '@sveltejs/adapter-auto';
 
-const dev = process.env.NODE_ENV === 'development';
-
 export default {
   kit: {
+    adapter: adapter({
+      // default options are shown
+      pages: 'build',
+      assets: 'build',
+      fallback: null,
+    }),
     paths: {
-      base: dev ? '' : '/karomips.github.io',  // Set the base path for GitHub Pages
+      base: '/karomips.github.io', // this should match your GitHub repository name
     },
-    adapter: adapter(),
   },
 };
