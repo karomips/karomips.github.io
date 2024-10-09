@@ -1,0 +1,27 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and export site
+        run: npm run build && npm run export
+
+      - name: Deploy to GitHub Pages
+        uses: actions/github-pages@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          directory: 'build'
+          repository_name: 'karomips/karomips.github.io'
+          branch: 'gh-pages'
